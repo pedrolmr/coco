@@ -1,5 +1,12 @@
-import React from "react";
-import { StyleSheet, SafeAreaView, View } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  TextInput,
+  Text,
+  Switch,
+} from "react-native";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import AppButton from "./app/components/AppButton";
@@ -11,8 +18,12 @@ import Icon from "./app/components/Icon";
 import ListItem from "./app/components/ListItem";
 import AccountScreen from "./app/screens/AccountScreen";
 import ListingsScreen from "./app/screens/ListingsScreen";
+import AppPicker from "./app/components/AppPicker";
+import AppTextInput from "./app/components/AppTextInput";
 
 export default function App() {
+  // const [firstName, setFirstName] = useState("");
+  // const [isNew, setIsNew] = useState(false);
   // return <WelcomeScreen />;
   // return <ViewImageScreen />;
   return (
@@ -34,6 +45,12 @@ export default function App() {
     // <ViewImageScreen />
     // <MessagesScreen />
     // <AccountScreen />
-    <ListingsScreen />
+    // <ListingsScreen />
+    <Screen>
+      {/* <AppTextInput placeholder="Username" icon="email" /> */}
+      {/* <Switch value={isNew} onValueChange={(newValue) => setIsNew(newValue)} /> */}
+      <AppPicker icon="apps" placeholder="Category" />
+      <AppTextInput icon="email" placeholder="Email" />
+    </Screen>
   );
 }
