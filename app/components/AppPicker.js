@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AppText from "./AppText";
 import defaultStyles from "../config/styles";
 
-function AppPicker({ icon, placeholder, ...otherProps }) {
+function AppPicker({ icon, items, placeholder }) {
   return (
     <View style={styles.container}>
       {icon && (
