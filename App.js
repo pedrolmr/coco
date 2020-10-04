@@ -21,9 +21,16 @@ import ListingsScreen from "./app/screens/ListingsScreen";
 import AppPicker from "./app/components/AppPicker";
 import AppTextInput from "./app/components/AppTextInput";
 
+const categories = [
+  { label: "lipsticks", value: 1 },
+  { label: "lashes", value: 2 },
+  { label: "makeup", value: 3 },
+];
+
 export default function App() {
   // const [firstName, setFirstName] = useState("");
   // const [isNew, setIsNew] = useState(false);
+  const [category, setCategory] = useState();
   // return <WelcomeScreen />;
   // return <ViewImageScreen />;
   return (
@@ -49,7 +56,13 @@ export default function App() {
     <Screen>
       {/* <AppTextInput placeholder="Username" icon="email" /> */}
       {/* <Switch value={isNew} onValueChange={(newValue) => setIsNew(newValue)} /> */}
-      <AppPicker icon="apps" placeholder="Category" />
+      <AppPicker
+        selectedItem={category}
+        onSelectItem={(item) => setCategory(item)}
+        items={categories}
+        icon="apps"
+        placeholder="Category"
+      />
       <AppTextInput icon="email" placeholder="Email" />
     </Screen>
   );
