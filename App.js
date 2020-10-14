@@ -20,50 +20,10 @@ import AccountScreen from "./app/screens/AccountScreen";
 import ListingsScreen from "./app/screens/ListingsScreen";
 import AppPicker from "./app/components/AppPicker";
 import AppTextInput from "./app/components/AppTextInput";
-
-const categories = [
-  { label: "lipsticks", value: 1 },
-  { label: "lashes", value: 2 },
-  { label: "makeup", value: 3 },
-];
+import LoginScreen from "./app/screens/LoginScreen";
 
 export default function App() {
-  // const [firstName, setFirstName] = useState("");
-  // const [isNew, setIsNew] = useState(false);
-  const [category, setCategory] = useState();
-  // return <WelcomeScreen />;
-  // return <ViewImageScreen />;
   return (
-    // <View
-    //   style={{
-    //     backgroundColor: "#f8f4f4",
-    //     padding: 20,
-    //     paddingTop: 100,
-    //   }}
-    // >
-    //   <Card
-    //     title="makeup for sale"
-    //     subTitle="$30"
-    //     image={require("./app/assets/makeup.jpg")}
-    //   />
-    // </View>
-    // <ListingDetailsScreen />
-    // <WelcomeScreen />
-    // <ViewImageScreen />
-    // <MessagesScreen />
-    // <AccountScreen />
-    // <ListingsScreen />
-    <Screen>
-      {/* <AppTextInput placeholder="Username" icon="email" /> */}
-      {/* <Switch value={isNew} onValueChange={(newValue) => setIsNew(newValue)} /> */}
-      <AppPicker
-        selectedItem={category}
-        onSelectItem={(item) => setCategory(item)}
-        items={categories}
-        icon="apps"
-        placeholder="Category"
-      />
-      <AppTextInput icon="email" placeholder="Email" />
-    </Screen>
+      <LoginScreen />
   );
 }
