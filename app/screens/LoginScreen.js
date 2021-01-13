@@ -4,10 +4,14 @@ import { Formik } from "formik";
 import * as Yup from 'yup';
 
 import Screen from "../components/Screen";
-import AppText from '../components/AppText';
-import AppTextInput from "../components/AppTextInput";
-import AppButton from "../components/AppButton";
-import ErrorMessage from "../components/ErrorMessage";
+// import AppText from '../components/AppText';
+// import AppTextInput from "../components/AppTextInput";
+// import AppButton from "../components/AppButton";
+// import ErrorMessage from "../components/forms/ErrorMessage";
+// import AppForm from '../components/forms/AppForm';
+// import AppFormField from "../components/forms/AppFormField";
+// import SubmitButton from "../components/forms/SubmitButton";
+import {AppForm, AppFormField, SubmitButton} from '../components/forms';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -20,41 +24,31 @@ function LoginScreen(props) {
     <Screen style={styles.container}>
       <Image style={styles.logo} source={require("../assets/Cocologo.png")} />
 
-      <Formik
+      <AppForm
         initialValues={{ email: '', password: '' }}
         onSubmit={values => console.log(values)}
         validationSchema={validationSchema}
       >
-        { ({handleChange, handleSubmit, errors, setFieldTouched, touched}) => (
-          <>
-            <AppTextInput 
-              autoCapitalize="none" 
-              autoCorrect={false}
-              icon="email"
-              keyboardType="email-address"
-              onBlur={() => setFieldTouched("email")}
-              onChangeText={handleChange("email")}
-              placeholder="Email"
-              textContentType="emailAddress"
-            />
-            {/* <AppText style={{ color: "red"}}>{errors.email}</AppText> */}
-            <ErrorMessage error={errors.email} visible={touched.email}/>
-            <AppTextInput 
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="lock"
-              onBlur={() => setFieldTouched("password")}
-              onChangeText={handleChange("password")}
-              placeholder="Password"
-              secureTextEntry={true}
-              textContentType="password"
-            />
-            {/* <AppText style={{ color: "red"}}>{errors.password}</AppText> */}
-            <ErrorMessage error={errors.password} visible={touched.password}/>
-            <AppButton title="Login" onPress={handleSubmit} />
-          </>
-        )}
-      </Formik>
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="email"
+          keyboardType="email-address"
+          name="email"
+          placeholder="Email"
+          textContentType="emailAddress"
+        />
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="lock"
+          name="password"
+          placeholder="Password"
+          secureTextEntry
+          textContentType="password"
+        />
+        <SubmitButton title="Login" />
+      </AppForm>
     </Screen>
   );
 }

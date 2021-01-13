@@ -1,29 +1,31 @@
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  SafeAreaView,
-  View,
-  TextInput,
-  Text,
-  Switch,
-} from "react-native";
-import WelcomeScreen from "./app/screens/WelcomeScreen";
-import ViewImageScreen from "./app/screens/ViewImageScreen";
-import AppButton from "./app/components/AppButton";
-import Card from "./app/components/Card";
-import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
+import React from "react";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
+import ListItem from './app/components/ListItem';
+import {Text} from "react-native";
+import Screen from './app/components/Screen';
 import MessagesScreen from "./app/screens/MessagesScreen";
-import Screen from "./app/components/Screen";
-import Icon from "./app/components/Icon";
-import ListItem from "./app/components/ListItem";
-import AccountScreen from "./app/screens/AccountScreen";
-import ListingsScreen from "./app/screens/ListingsScreen";
-import AppPicker from "./app/components/AppPicker";
-import AppTextInput from "./app/components/AppTextInput";
-import LoginScreen from "./app/screens/LoginScreen";
+
+// const items = [
+//   {
+//     title: "T1",
+//     subTitle: "s simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+//     image: require('./app/assets/becky.jpg')
+//   },
+//   {
+//     title: "T2",
+//     subTitle: "s simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+//     image: require('./app/assets/becky.jpg')
+//   }
+// ]
 
 export default function App() {
-  return (
-      <LoginScreen />
+  return(
+    // <Screen>
+    // {items.map((item, i) => (
+    //   <ListItem key={i} title={item.title} subTitle={item.subTitle} image={item.image}/>
+    // ))}
+    // </Screen>
+    // <MessagesScreen />
+    <ListingEditScreen />
   );
 }

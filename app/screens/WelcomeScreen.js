@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
 
-import AppButton from "../components/AppButton";
+import AppButton from "../components/Button";
 import colors from "../config/colors";
 export default function WelcomeScreen() {
   return (
@@ -11,7 +11,7 @@ export default function WelcomeScreen() {
       source={require("../assets/background.png")}
     >
       <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={require("../assets/Cocologo.png")} />
+        <Image style={sWelctyles.logo} source={require("../assets/Cocologo.png")} />
         <Text style={styles.tagline}>Makeup marketplace</Text>
       </View>
       <View style={styles.buttonsContainer}>

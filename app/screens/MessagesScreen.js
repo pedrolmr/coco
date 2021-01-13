@@ -17,13 +17,13 @@ const initialMessages = [
   {
     id: 1,
     title: "T1",
-    description: "D1",
+    description: " is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, ",
     image: require("../assets/becky.jpg"),
   },
   {
     id: 2,
     title: "T2",
-    description: "D2",
+    description: " is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, ",
     image: require("../assets/becky.jpg"),
   },
 ];
