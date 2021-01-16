@@ -1,9 +1,10 @@
-import React from "react";
-import ListingEditScreen from "./app/screens/ListingEditScreen";
-import ListItem from './app/components/ListItem';
-import {Text} from "react-native";
+import React, {useState, useEffect} from "react";
 import Screen from './app/components/Screen';
-import MessagesScreen from "./app/screens/MessagesScreen";
+import * as ImagePicker from 'expo-image-picker'
+import * as Permissions from 'expo-permissions';
+// import Button from './app/components/Button';
+import {Button, StyleSheet, Text, View, Image} from 'react-native';
+
 
 // const items = [
 //   {
@@ -18,14 +19,35 @@ import MessagesScreen from "./app/screens/MessagesScreen";
 //   }
 // ]
 
+
 export default function App() {
+  const [imageUri, setImageUri] = useState()
+  const requestPermission = async () => {
+    const {granted} = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if(!granted){
+      alert('please enable permissions to access library!');
+    }
+  }
+
+  useEffect(() => {
+    requestPermission();
+  }, [])
+
+  const selectImage = async () => {
+    try {
+      const res = await ImagePicker.launchImageLibraryAsync();
+      if(!res.cancelled)
+        setImageUri(res.uri)
+      
+    } catch (error) {
+      console.log('error reading an image', error)
+    }
+  }
+
   return(
-    // <Screen>
-    // {items.map((item, i) => (
-    //   <ListItem key={i} title={item.title} subTitle={item.subTitle} image={item.image}/>
-    // ))}
-    // </Screen>
-    // <MessagesScreen />
-    <ListingEditScreen />
+    <Screen>
+      <Button title="Select Image" onPress={selectImage}/>
+      <Image source={{ uri: imageUri }} style={{ width:200, height: 200}} />
+    </Screen>
   );
 }
