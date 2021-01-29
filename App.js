@@ -1,53 +1,78 @@
-import React, {useState, useEffect} from "react";
+import React from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import {navigationTheme} from './app/navigation/NavigationTheme';
+
 import Screen from './app/components/Screen';
-import * as ImagePicker from 'expo-image-picker'
-import * as Permissions from 'expo-permissions';
-// import Button from './app/components/Button';
-import {Button, StyleSheet, Text, View, Image} from 'react-native';
+import AuthNavigator from './app/navigation/AuthNavigator';
+import AppNavigator from './app/navigation/AppNavigator';
 
+const Link = () => {
+  const navigation = useNavigation();
+  return (
+    <Button title="Click" onPress={() => navigation.navigate("TweetDetails", {id: 1})}/>
+  )
+}
 
-// const items = [
-//   {
-//     title: "T1",
-//     subTitle: "s simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-//     image: require('./app/assets/becky.jpg')
-//   },
-//   {
-//     title: "T2",
-//     subTitle: "s simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-//     image: require('./app/assets/becky.jpg')
-//   }
-// ]
+const Tweets = ({navigation}) => (
+  <Screen>
+    <Text>Tweets</Text>
+    <Link />
+  </Screen>
+)
 
+const TweetDetails = ({route}) => (
+  <Screen>
+    <Text>Tweet Details {route.params.id}</Text>
+  </Screen>
+);
+
+const Stack = createStackNavigator();
+
+const StackNavigator = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Tweets" component={Tweets} />
+    <Stack.Screen 
+      name="TweetDetails" 
+      component={TweetDetails} 
+      options={({route}) => ({title: route.params.id})}
+    />
+  </Stack.Navigator>
+)
+
+const Account = () => <Screen><Text>Account</Text></Screen>
+
+const Tab = createBottomTabNavigator();
+const TabNavigator = () => (
+  <Tab.Navigator
+    tabBarOptions={{
+      activeBackgroundColor: "tomato",
+      activeTintColor: "white",
+      inactiveBackgroundColor: "#eee",
+      inactiveTintColor: "black"
+    }}
+  >
+    <Tab.Screen 
+      name="Feed" 
+      component={Tweets}
+      options={{
+        tabBarIcon: ({size}) => <MaterialCommunityIcons name="home" size={size}/>
+      }}
+    />
+    <Tab.Screen name="Account" component={Account}/>
+
+  </Tab.Navigator>
+)
 
 export default function App() {
-  const [imageUri, setImageUri] = useState()
-  const requestPermission = async () => {
-    const {granted} = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if(!granted){
-      alert('please enable permissions to access library!');
-    }
-  }
-
-  useEffect(() => {
-    requestPermission();
-  }, [])
-
-  const selectImage = async () => {
-    try {
-      const res = await ImagePicker.launchImageLibraryAsync();
-      if(!res.cancelled)
-        setImageUri(res.uri)
-      
-    } catch (error) {
-      console.log('error reading an image', error)
-    }
-  }
-
-  return(
-    <Screen>
-      <Button title="Select Image" onPress={selectImage}/>
-      <Image source={{ uri: imageUri }} style={{ width:200, height: 200}} />
-    </Screen>
-  );
+   return(
+     <NavigationContainer theme={navigationTheme}>
+       <AppNavigator />
+     </NavigationContainer>
+   )
 }
+
+const styles = StyleSheet.create({})
