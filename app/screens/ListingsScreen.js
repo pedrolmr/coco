@@ -1,43 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FlatList, StyleSheet } from "react-native";
 
+import ActivityIndicator from '../components/ActivityIndicator';
+import Button from '../components/Button';
+import AppText from '../components/Text';
 import Screen from "../components/Screen";
 import Card from "../components/Card";
 import colors from "../config/colors";
-
-const listings = [
-  {
-    id: 1,
-    title: "makeup for sale",
-    price: 20,
-    image: require("../assets/makeup.jpg"),
-  },
-  {
-    id: 2,
-    title: "lipsticks for sale!",
-    price: 10,
-    image: require("../assets/lipsticks.png"),
-  },
-  {
-    id: 3,
-    title: "handmade lashes for sale",
-    price: 5,
-    image: require("../assets/lashes.jpeg"),
-  },
-];
+import listingsApi from '../api/listings';
+import routes from '../navigation/routes';
+import useApi from '../hooks/useApi';
 
 function ListingsScreen({ navigation }) {
+
+  const getListingsApi = useApi(listingsApi.getListings);
+
+  useEffect(() => {
+    getListingsApi.request()
+  }, []);
+
   return (
     <Screen style={styles.screen}>
+      {getListingsApi.error && 
+        <>
+          <AppText>
+            Couldn't retrieve any listings.
+          </AppText>
+
+          <Button title="Retry" onPress={loadListings}/>
+        </>
+      }
+      <ActivityIndicator visible={getListingsApi.loading} />
       <FlatList
-        data={listings}
+        data={getListingsApi.data}
         keyExtractor={(listing) => listing.id.toString()}
         renderItem={({ item }) => (
           <Card
             title={item.title}
             subTitle={"$" + item.price}
-            image={item.image}
-            onPress={() => navigation.navigate("ListingDetails", item)}
+            imageUrl={item.images[0].url}
+            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
       />

@@ -3,6 +3,8 @@ import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
 
 import Button from "../components/Button";
 import colors from "../config/colors";
+import routes from '../navigation/routes';
+
 export default function WelcomeScreen({navigation}) {
   return (
     <ImageBackground
@@ -15,8 +17,8 @@ export default function WelcomeScreen({navigation}) {
         <Text style={styles.tagline}>Makeup marketplace</Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <Button title="Login" color="primary" onPress={() => navigation.navigate("Login")}/>
-        <Button title="Register" color="secondary" onPress={() => navigation.navigate("Register")} />
+        <Button title="Login" color="primary" onPress={() => navigation.navigate(routes.LOGIN)}/>
+        <Button title="Register" color="secondary" onPress={() => navigation.navigate(routes.REGISTER)} />
         <View style={styles.registerButton}></View>
       </View>
     </ImageBackground>
